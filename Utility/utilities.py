@@ -84,7 +84,7 @@ def NN_component(fea, k=1, metric='cosine', mode='and', negative_dis=False):
         
     return affinity
 
-def load_train_data(id='151673', knn=7, data_path='/root/GMAE/DLPFC', img_path='./', margin=25, metric='cosine', dim_RNA=3000, dataset='DLPFC', add_img_pos=True, add_rna_pos=True, return_adata=False):
+def load_train_data(id='151673', knn=7, data_path='/Data/DLPFC', img_path='./', margin=25, metric='cosine', dim_RNA=3000, dataset='DLPFC', add_img_pos=True, add_rna_pos=True, return_adata=False):
     import torch
     from .load_data.load_DLPFC import load_DLPFC_data
     from .load_data.load_Nano import load_Nano_data
@@ -144,3 +144,34 @@ def load_train_data(id='151673', knn=7, data_path='/root/GMAE/DLPFC', img_path='
         return edge_index, RNA_fea, G, G_neg, gt, adata
     else:
         return edge_index, RNA_fea, G, G_neg, gt
+    
+    
+from scipy.optimize import linear_sum_assignment
+
+
+def hungarian_match(true_label, pred_label):
+    l1 = list(set(true_label))
+    numclass1 = len(l1)
+
+    l2 = list(set(pred_label))
+    numclass2 = len(l2)
+    if numclass1 != numclass2:
+        print('Class Not equal, Error!!!!')
+        return 0
+
+    cost = np.zeros((numclass1, numclass2), dtype=int)
+    for i, c1 in enumerate(l1):
+        mps = [i1 for i1, e1 in enumerate(true_label) if e1 == c1]
+        for j, c2 in enumerate(l2):
+            mps_d = [i1 for i1 in mps if pred_label[i1] == c2]
+            cost[i][j] = len(mps_d)
+    
+    row_ind, col_ind = linear_sum_assignment(-cost)
+    
+    new_predict = np.zeros(len(pred_label))
+    for i, c in enumerate(l1):
+        c2 = l2[col_ind[i]]
+        ai = [ind for ind, elm in enumerate(pred_label) if elm == c2]
+        new_predict[ai] = c
+    
+    return new_predict

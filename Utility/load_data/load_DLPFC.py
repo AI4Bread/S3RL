@@ -46,7 +46,8 @@ def load_DLPFC_data(id, path='./', dim_RNA=3000, margin=25):
     labels_set = set(labels)
     labels_dict = {k:v for k, v in zip(labels_set, list(range(len(labels_set))))}
     gt = np.array([labels_dict[i] for i in labels])
-
+    adata.obsm['label_dict'] = adata.obs['Ground Truth'].map(labels_dict)
+    adata.X = adata.X.toarray()
     return patchs, RNA_emb, spatial_loc, gt, adata
 
 
