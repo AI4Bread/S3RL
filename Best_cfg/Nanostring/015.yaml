@@ -1,0 +1,15 @@
+d_emb: 32
+d_hid: 128
+drop: 0.2
+edge_img: false
+edge_rna: true
+epoch: 1500
+gamma: 1
+l1: 0.02
+l2: 10
+lr: 0.0005
+mask: 0.1
+mask_edge: 0.6
+n_head: 2
+replace: 0.05
+t: 1.0e-05
