@@ -53,7 +53,9 @@ We also provide the well-trained models for the four datasets. You can download 
 
 And the `demo_visualization.ipynb` notebook provides a simple example of how to visualize the clustering results.
 
-**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the `Tutorial.ipynb` file (In progress and will complete soon).**
+## Tutorial
+
+**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the [S3RL online tutorial](https://s3rl.readthedocs.io/en/latest/) (In progress and will complete soon).**
 
 ## Acknowledgements
 Parts of our work are built upon the following repositories: [SiGra](https://github.com/QSong-github/SiGra), [GraphST](https://github.com/JinmiaoChenLab/GraphST/blob/main/README.md?plain=1), [STAGATE](https://github.com/QIFEIDKN/STAGATE). We are very grateful for their contributions.
