@@ -3,7 +3,7 @@ import torch
 from sklearn.metrics.cluster import adjusted_rand_score as ARI
 import torch.nn.functional as F
 from torch import optim
-from Utility.utilities import seed_torch, load_train_data
+from Utility.tools import seed_torch, load_train_data
 from Utility.backbone import SingleModel, train_one_epoch
 from copy import deepcopy		
 

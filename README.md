@@ -22,10 +22,10 @@ pip install -r requirements.txt
 
 *Note that the code is tested with Python 3.7.12 and PyTorch 1.13.0 on a single NVIDIA GeForce RTX 3090 GPU. If you encounter any issues, please check the compatibility of the packages in `requirements.txt` with your Python version. Additionally, different versions of libraries and different GPU devices may lead to varied outcomes, so to reproduce our results, please use the same versions and hardware configuration as specified.*
 
-#### Download the datasets and place them in the `data` directory, and make sure the directory structure looks like this:
+#### Download the datasets and place them in the `Data` directory, and make sure the directory structure looks like this:
 ```
 S3RL
-├── data
+├── Data
 │   ├── DLPFC
 │   │   ├── 151673
 │   │   ├── 151674

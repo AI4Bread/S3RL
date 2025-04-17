@@ -3,11 +3,11 @@ import torch
 from sklearn.metrics.cluster import adjusted_rand_score as ARI
 import torch.nn.functional as F
 from torch import optim
-from Utility.utilities import seed_torch
+from Utility.tools import seed_torch
 from Utility.backbone import SingleModel, train_one_epoch
 from copy import deepcopy		
 from tqdm import tqdm
-from Utility.utilities import parameter_setting
+from Utility.tools import parameter_setting
 args = parameter_setting().parse_args([])
 
 def train_(edge_index, fea, G, G_neg, gt, cfg=None):
