@@ -55,7 +55,7 @@ And the `demo_visualization.ipynb` notebook provides a simple example of how to 
 
 ## Tutorial
 
-**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the [S3RL online tutorial](https://s3rl.readthedocs.io/en/latest/) (In progress and will complete soon).**
+**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a> (In progress and will complete soon).**
 
 ## Acknowledgements
 Parts of our work are built upon the following repositories: [SiGra](https://github.com/QSong-github/SiGra), [GraphST](https://github.com/JinmiaoChenLab/GraphST/blob/main/README.md?plain=1), [STAGATE](https://github.com/QIFEIDKN/STAGATE). We are very grateful for their contributions.
