@@ -10,30 +10,30 @@ from tqdm import tqdm
 from Utility.tools import parameter_setting
 args = parameter_setting().parse_args([])
 
-def train_(edge_index, fea, G, G_neg, gt, cfg=None):
+def train_(adata, C, **cfg):
     
     seed_torch()
+    
+    edge_index = torch.from_numpy(np.vstack(np.nonzero(adata.obsm['G']))).long().cuda()  
+    G = torch.from_numpy(adata.obsm['G']).cuda()
+    G_neg = torch.from_numpy(adata.obsm['G_neg']).cuda()
+    
     waiter, min_loss = 0, torch.inf
     
     for k, v in cfg.items():
         if hasattr(args, k):
             setattr(args, k, v)
-        
-
-    edge_index = edge_index.cuda()
-    G = G.cuda()
-    G_neg = G_neg.cuda()
-    
-    N, C = torch.tensor(gt.shape[0], dtype=torch.float).cuda(), torch.tensor(len(set(gt)), dtype=torch.float).cuda()
-    
-    fea = F.normalize(fea.cuda(), dim=-1)
+    if not isinstance(adata.X, np.ndarray):
+        adata.X = adata.X.toarray()
+    X = F.normalize(torch.from_numpy(adata.X).cuda(), dim=-1)
+    N, C = torch.tensor(X.shape[0], dtype=torch.float).cuda(), torch.tensor(C, dtype=torch.float).cuda()
     
     assert args.d_emb % args.n_head == 0
     assert args.d_hid % args.n_head == 0
         
     model = SingleModel(drop=args.drop, 
                         n_head=args.n_head, 
-                        hidden_dims=[fea.shape[1], args.d_hid//args.n_head, args.d_emb//args.n_head], 
+                        hidden_dims=[X.shape[1], args.d_hid//args.n_head, args.d_emb//args.n_head], 
                         mask=args.mask, 
                         replace=args.replace, 
                         mask_edge=args.mask_edge, 
@@ -47,9 +47,9 @@ def train_(edge_index, fea, G, G_neg, gt, cfg=None):
     
     for epoch in tqdm(range(args.epoch), desc='Training'):
         model.train()
-        emb, recon, keep_nodes, class_prediction = model(fea, edge_index, t=args.t)
+        emb, recon, keep_nodes, class_prediction = model(X, edge_index, t=args.t)
  
-        loss = train_one_epoch(args, fea, recon, emb, keep_nodes, class_prediction, C, N, G, G_neg, optimizer, scheduler)
+        loss = train_one_epoch(args, X, recon, emb, keep_nodes, class_prediction, C, N, G, G_neg, optimizer, scheduler)
             
         if  loss < min_loss:
             min_loss = loss
@@ -67,9 +67,11 @@ def train_(edge_index, fea, G, G_neg, gt, cfg=None):
         
     model.eval()
     with torch.no_grad():
-        emb, recon, keep_nodes, class_prediction = model(fea, edge_index, t=args.t)
+        emb, recon, keep_nodes, class_prediction = model(X, edge_index, t=args.t)
 
         pred = class_prediction.argmax(dim=-1).cpu().numpy()
-        ari_pred = ARI(gt, pred)
 
-    return ari_pred, pred, emb.detach().cpu().numpy(), recon.detach().cpu().numpy()
+    adata.obsm['X_emb'] = emb.detach().cpu().numpy()
+    adata.obsm['X_recon'] = recon.detach().cpu().numpy()
+    adata.obs['pred'] = pred
+    return adata
