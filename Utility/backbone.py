@@ -4,6 +4,7 @@ from .Optimize_prototypes import create_hypersphere
 import torch.nn as nn
 from torch_geometric.nn import LayerNorm
 from torch_geometric.nn import TransformerConv as TCon
+import numpy as np
 
 
 epsilon = 1e-16
@@ -144,19 +145,15 @@ def Loss_recon_graph(G, G_neg, keep_nodes, h2):
     
     return -loss_pos-loss_neg
 
-def train_one_epoch(args, fea, h4, h2, keep_nodes, class_prediction, C, N, G, G_neg, optimizer, scheduler):
+def train_one_epoch(fea, h4, h2, keep_nodes, class_prediction, C, N, G, G_neg, optimizer, gamma, l1, l2, scheduler):
     
     optimizer.zero_grad()
-    loss_recon = ((1 - (F.normalize(h4[keep_nodes]) * fea[keep_nodes]).sum(dim=-1))**args.gamma).mean()
-    loss_discrete = (torch.sqrt(C) - torch.norm(class_prediction, p=2, dim=0).sum()/ torch.sqrt(N)) / (torch.sqrt(C)-1)
-
+    loss_recon = ((1 - (F.normalize(h4[keep_nodes]) * fea[keep_nodes]).sum(dim=-1))**gamma).mean()
+    loss_discrete = (np.sqrt(C) - torch.norm(class_prediction, p=2, dim=0).sum()/ np.sqrt(N)) / (np.sqrt(C)-1)
     loss_recon_graph = Loss_recon_graph(G, G_neg, keep_nodes, h2).mean()
-    
-    loss = loss_recon + args.l1 * loss_discrete + args.l2 * loss_recon_graph
+    loss = loss_recon + l1 * loss_discrete + l2 * loss_recon_graph
     
     loss.backward()
     optimizer.step()  
-    
-    if args.sched:
-        scheduler.step()
+    scheduler.step()
     return loss.detach().item()

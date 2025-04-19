@@ -1,41 +1,6 @@
-import argparse
 import numpy as np
 import random
 import os
-
-epsilon = 1e-16
-
-def parameter_setting():
-    parser = argparse.ArgumentParser()
-      
-    # parser.add_argument('--data_path_root', type=str, default='..')
-    parser.add_argument('--data_path_root', type=str, default='./Data')
-    parser.add_argument('--img_path_root', default='./Img_encoder/models/', type=str)
-    parser.add_argument('--save_path', type=str, default='./checkpoints')
-    
-    parser.add_argument('--knn', type=int, default=5, help='Nanostring: 5, DLPFC: 7')
-    parser.add_argument('--id', type=str, default='1')
-    parser.add_argument('--device', type=str, default='3')
-    parser.add_argument('--dataset', default='Nanostring', type=str)
-    parser.add_argument('--d_emb', type=int, default=32, help='embedding dimension')
-    parser.add_argument('--d_hid', type=int, default=32, help='hidden dimension')
-    parser.add_argument('--drop', type=float, default=0.0, help='dropout rate')
-    parser.add_argument('--edge_img', action='store_true', help='use image edge')
-    parser.add_argument('--edge_rna', action='store_true', help='use RNA edge')
-    parser.add_argument('--epoch', type=int, default=2000, help='number of epochs')
-    parser.add_argument('--gamma', type=float, default=1.0, help='scale for loss')
-    parser.add_argument('--l1', type=float, default=0.5, help='weight for loss')
-    parser.add_argument('--l2', type=float, default=10.0, help='weight for loss')
-    parser.add_argument('--lr', type=float, default=0.0005, help='learning rate')
-    parser.add_argument('--mask', type=float, default=0.004, help='mask rate')
-    parser.add_argument('--mask_edge', type=float, default=0.4, help='mask edge rate')
-    parser.add_argument('--n_head', type=int, default=1, help='number of heads')
-    parser.add_argument('--replace', type=float, default=0.0, help='replace rate')
-    parser.add_argument('--sched', type=bool, default=True, help='use scheduler')
-    parser.add_argument('--t', type=float, default=0.13, help='temperature')
-    parser.add_argument('--tolerance', type=int, default=20, help='tolerance for early stopping')
-    
-    return parser
 
 def seed_torch(seed=0):
     import torch
