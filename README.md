@@ -27,5 +27,5 @@ pip install S3RL --index-url https://pypi.org/simple
 
 ## Tutorial
 
-**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a> (In progress and will complete soon).**
+**For more datails about training S3RL and realted downsstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
 
