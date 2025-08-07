@@ -5,6 +5,10 @@ This repository contains the source code for the paper "Separable Spatial Single
 ## Overview
 We propose S3RL (Separable Spatial Single-cell Representation Learning), a unified framework that integrates gene expression, spatial coordinates, and histological image features via a graph neural network and hyperspherical prototype-based separable representation learning. In spatial clustering tasks, S3RL improves the Adjusted Rand Index (ARI) by over 52\% on the Nanostring lung cancer dataset and over 26\% on the 10X DLPFC dataset compared to state-of-the-art methods. For multi-slice spatial alignment, S3RL achieves an average ARI improvement of over 65.4\% in partial brain slices and over 48.3\% in complete slices relative to GraphST, highlighting its superior robustness and alignment consistency across heterogeneous spatial inputs. Moreover, S3RL reveals more biologically meaningful ligand-receptor signaling relationships, enhancing the interpretability of cell-cell communication patterns.
 
+## Tutorial
+
+**For more datails about training S3RL and realted downstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
+
 
 ## Installation
 
@@ -25,7 +29,4 @@ Then, install the S3RL package by running the following command:
 pip install S3RL --index-url https://pypi.org/simple
 ```
 
-## Tutorial
-
-**For more datails about training S3RL and realted downstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
 
