@@ -7,7 +7,7 @@ We propose S3RL (Separable Spatial Single-cell Representation Learning), a unifi
 
 ## Tutorial
 
-**For more datails about training S3RL and realted downstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
+**For more datails about training and implementation of S3RL and related downstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
 
 
 ## Installation
