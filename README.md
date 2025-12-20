@@ -7,7 +7,24 @@ We propose S3RL (Separable Spatial Single-cell Representation Learning), a unifi
 
 ## Tutorial
 
-**For more datails about training and implementation of S3RL and related downstream tasks and analysis, please refer to the <a href="https://s3rl.readthedocs.io/en/latest/" target="_blank">S3RL online tutorial</a>.**
+**For comprehensive guidance on using S3RL, including environment installation, data preparation, model training, and step-by-step analysis workflows for all datasets used in this study, please refer to the [S3RL online tutorial](https://s3rl.readthedocs.io/en/latest/).**
+
+In addition, we provide a dedicated repository that collects the implementation scripts, configuration files, and execution instructions for all baseline methods used in our benchmarking experiments. This repository is intended to facilitate transparent, reproducible, and standardized comparisons.
+
+**Baseline methods implementation repository:**
+- 👉 [S3RL-Baselines (GitHub)](https://github.com/pengleiwangcn/S3RL-Baselines)
+
+The repository includes ready-to-run scripts for representative methods such as:
+- **GraphST**
+- **SEDR**
+- **STAGATE**
+- **SiGra**
+- **SpaGCN**
+- **SpaceFlow**
+- **conST**
+- **stDCL**
+
+Each method is accompanied by method-specific execution scripts (`run_*.py` / `run_*.sh`) and a unified README describing preprocessing steps, parameter settings, and evaluation protocols.
 
 
 ## Installation
